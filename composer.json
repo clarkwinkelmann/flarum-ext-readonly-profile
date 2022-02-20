@@ -1,0 +1,39 @@
+{
+    "name": "clarkwinkelmann/flarum-ext-readonly-profile",
+    "description": "Remove ability to edit various profile attributes",
+    "keywords": [
+        "flarum"
+    ],
+    "type": "flarum-extension",
+    "license": "MIT",
+    "require": {
+        "flarum/core": "^1.2"
+    },
+    "authors": [
+        {
+            "name": "Clark Winkelmann",
+            "homepage": "https://clarkwinkelmann.com/",
+            "email": "clark.winkelmann@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/clarkwinkelmann/flarum-ext-readonly-profile"
+    },
+    "autoload": {
+        "psr-4": {
+            "ClarkWinkelmann\\ReadonlyProfile\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Readonly Profile",
+            "category": "feature",
+            "icon": {
+                "name": "fas fa-user-lock",
+                "backgroundColor": "#684ba6",
+                "color": "#fff"
+            }
+        }
+    }
+}
