@@ -3,6 +3,7 @@
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/clarkwinkelmann/flarum-ext-readonly-profile/blob/master/LICENSE.md) [![Latest Stable Version](https://img.shields.io/packagist/v/clarkwinkelmann/flarum-ext-readonly-profile.svg)](https://packagist.org/packages/clarkwinkelmann/flarum-ext-readonly-profile) [![Total Downloads](https://img.shields.io/packagist/dt/clarkwinkelmann/flarum-ext-readonly-profile.svg)](https://packagist.org/packages/clarkwinkelmann/flarum-ext-readonly-profile) [![Donate](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.me/clarkwinkelmann)
 
 This extension removes the ability for users to perform various actions on the forum.
+It removes both the UI controls and disables the underlying REST API endpoints.
 
 This is intended for forums where administrators are the only person editing user profiles or to be used in custom integrations where the data is synced from a different platform.
 
@@ -20,6 +21,9 @@ To recover access to the forum in case of an issue you need to either:
 - Use an API Key to disable the settings or extension through the REST API.
 - Disable the setting or extension by manually editing the database.
 - Removing the Composer package.
+
+If you use an external login system and have set a random password on Flarum user accounts, **Disable Login**, **Disable Access Token Creation** and **Disable Email Change** aren't strictly needed because users cannot use these endpoints without knowing the Flarum user password anyway.
+You could just hide the buttons from the UI with CSS and it would be enough.
 
 ## Installation
 
