@@ -7,6 +7,7 @@ import UserCard from 'flarum/forum/components/UserCard';
 import LogInModal from 'flarum/forum/components/LogInModal';
 import IndexPage from 'flarum/forum/components/IndexPage';
 import PostStream from 'flarum/forum/components/PostStream';
+import CommentPost from 'flarum/forum/components/CommentPost';
 import DiscussionControls from 'flarum/forum/utils/DiscussionControls';
 
 app.initializers.add('readonly-profile', () => {
@@ -66,6 +67,41 @@ app.initializers.add('readonly-profile', () => {
         // Keep the original button that says login to reply, but disable it
         replyVdom.attrs.disabled = true;
     });
+
+    // Remove reply link for guests if login is disabled (it would bring up the login modal)
+    extend(CommentPost.prototype, 'actionItems', function (items) {
+        if (
+            !app.forum.attribute('readonly-profile.disableLogin') ||
+            !items.has('reply') ||
+            app.session.user
+        ) {
+            return;
+        }
+
+        items.remove('reply');
+    });
+
+    const PostQuoteButton = flarum.core.compat['mentions/forum/fragments/PostQuoteButton'];
+
+    // Because we can't easily remove the quote button for guests, we'll keep it but make it disabled state
+    if (PostQuoteButton) {
+        extend(PostQuoteButton.prototype, 'view', function (vdom) {
+            if (
+                !app.forum.attribute('readonly-profile.disableLogin') ||
+                app.session.user
+            ) {
+                return;
+            }
+
+            // If the data format is unexpected, skip this feature
+            if (!vdom || !vdom.attrs) {
+                return;
+            }
+
+            // Disable quote button
+            vdom.attrs.disabled = true;
+        });
+    }
 
     extend(SettingsPage.prototype, 'accountItems', function (items) {
         if (app.forum.attribute('readonly-profile.disableEmailChange')) {
