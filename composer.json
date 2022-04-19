@@ -18,7 +18,8 @@
         }
     ],
     "support": {
-        "source": "https://github.com/clarkwinkelmann/flarum-ext-readonly-profile"
+        "source": "https://github.com/clarkwinkelmann/flarum-ext-readonly-profile",
+        "forum": "https://discuss.flarum.org/d/30633"
     },
     "autoload": {
         "psr-4": {
